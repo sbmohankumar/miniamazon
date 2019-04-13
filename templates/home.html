@@ -1,0 +1,90 @@
+
+{% extends "layout.html" %}
+
+{% block body %}
+
+	<h1>Welcome to My Amazon!</h1>
+
+{% if session %}
+
+	<p> Hello {{ session['username'] }} </p>
+	<p> you have logged in as {{ session['c_type']}} </p>
+
+
+{% if session['c_type'] == 'seller' %}
+
+	<h3> Add products here: </h3>
+
+	<form action="/seller" method="POST">
+
+        Product name:<br>
+        <input type="text" name="name" placeholder="enter product name...">
+        <br>
+        Description:<br>
+        <input type="text" name="description" placeholder="description the product...">
+        <br>
+        Price:<br>
+        <input type="text" name="price" placeholder="price...">
+        <br><br>
+        <input type="submit" value="submit">
+
+	</form>
+
+	<!-- <p><a href = "/logout"> logout</a></p> -->
+	<p> To check all the products you have added <a href = "/products"> Click here </a><</p>
+
+	
+	{% else %}
+	<h3> <a href="/products"> click here</a> to buy products! </a></h3>
+    <a href="/cart"> cart </a>
+
+{% endif %}
+
+
+	<!-- <p><a href = "/products"> Click here</a>To Buy products</p> -->
+	<p><a href = "/logout"> logout</a></p>
+
+
+{% else %}
+
+	<form action="/login" method="POST">
+    
+        Username:<br>
+        <input type="text" name="username" placeholder="enter username here...">
+        <br>
+        Password:<br>
+        <input type="password" name="password" placeholder="enter password here...">
+        <br>
+        <br>
+        <input type="submit" value="submit">
+
+	</form>
+
+<h3> No Account? Sign up Below! </h3>
+
+<form action="/signup" method="POST">
+    
+        Username:<br>
+        <input type="text" name="username" placeholder="enter username here...">
+        <br>
+        Email:<br>
+        <input type="text" name="email" placeholder="enter email...">
+        <br>
+        Password:<br>
+        <input type="password" name="password" placeholder="enter password here...">
+        <br>
+        Re-enter Password:<br>
+        <input type="password" name="rpassword" placeholder="re-enter password...">
+        <br>
+        <br>
+        <input type="submit" value="submit"><br>
+        <br>
+        Customer Type:<br>
+         <input type="radio" name="c_type" value="buyer" checked> buyer<br>
+         <input type="radio" name="c_type" value="seller"> seller<br>
+</form>
+
+
+{% endif %}
+
+{% endblock body %}

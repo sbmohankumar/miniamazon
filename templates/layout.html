@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% if title %}
+	<title>{{title}}</title>
+	{%else%}
+	<title>Amazon</title>
+	{% endif %}
+
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/home.css')}}">
+</head>
+
+<body>
+	{% block body %}{% endblock body %}
+</body>
+
+<footer>
+	<p>copyright 2019</p>
+	{% if not home %}
+	<p> Go to <a href = "{{url_for ('home')}}"> homepage </a> </p>
+	{% endif %}
+</footer>
+</html>

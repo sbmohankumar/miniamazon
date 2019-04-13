@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+{% for product_info, quantity in cart %}
+
+<ul>
+
+	<li><b> product Name </b> : {{ product_info['name'] }} </li>
+	<li><b> product Desription </b> : {{ product_info['description'] }} </li>
+	<li><b> product price </b> : {{ product_info['price'] }} </li>
+	<li><b> product seller </b> : {{ product_info['seller'] }} </li>
+	<li><b> quantity </b> : {{quantity}}</li>
+
+	<form action = '/removecart' method = "POST">
+
+		<input type="hidden" name= "id" value = "{{product_info['_id']}}">
+		<input type = "submit" value = "remove one unit from cart">
+	</form>
+</ul>
+{%endfor %}
+
+<b><p> The total cost of products in your cart is Rs: </p>{{total}}</b>
+	
+<form action ="/buy" method="POST">
+	<input type= "submit" name= "buy" value= "Buy">
+</form>
+
+
+<!-- db.users.update( { "_id" : ObjectId("5c9f1d78df7d440c3f8831fe") },{ $unset: {"cart": ""}}) -->
+
+{% endblock body%}

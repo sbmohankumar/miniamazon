@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h3> Products </h3>
+
+{% for product in products %}
+
+	<ul>
+		<li><b> products name </b> : {{product['name']}} </li>
+		<li><b> products description </b> : {{product['description']}} </li>
+		<li><b> products price </b> : {{product['price']}} </li>
+
+		{% if session['c_type'] == "buyer" %}
+		<li><b> products seller </b> {{product['seller']}} </li>
+		
+
+		<form action = '/addcart' method="POST">
+
+		<input type = "hidden" name = "id" value = "{{ product['_id']}}">
+		<input type = "submit" value = "add to cart">
+
+		</form>
+		{% endif %}
+
+	</ul>
+
+{% endfor %}
+
+{% endblock body%}
